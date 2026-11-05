@@ -4,12 +4,13 @@
   "description": "AI-powered civic issue reporting platform - backend API",
   "main": "server.js",
   "private": true,
-  "scripts": {
-    "start": "node --no-warnings=ExperimentalWarning server.js",
+   "scripts": {
+    "start": "node backend/server.js",
+    "build": "npm install && npm install --prefix backend",
     "dev": "node --no-warnings=ExperimentalWarning --watch server.js"
   },
   "engines": {
-    "node": ">=22.13"
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "@google/genai": "^2.32.0",
