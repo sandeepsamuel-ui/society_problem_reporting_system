@@ -1,0 +1,22 @@
+{
+  "name": "civicpulse-backend",
+  "version": "1.0.0",
+  "description": "AI-powered civic issue reporting platform - backend API",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node --no-warnings=ExperimentalWarning server.js",
+    "dev": "node --no-warnings=ExperimentalWarning --watch server.js"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "@google/genai": "^2.32.0",
+    "@huggingface/transformers": "^4.3.2",
+    "bcryptjs": "^3.0.3",
+    "express": "^4.22.3",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.5.0"
+  }
+}

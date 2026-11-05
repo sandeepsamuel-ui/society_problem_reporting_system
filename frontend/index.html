@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CivicPulse – Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="auth-wrap">
+  <section class="auth-hero">
+    <div class="hero-top">
+      <div class="brand"><span class="logo">🏙️</span> CivicPulse</div>
+      <div class="lang-switch on-dark"></div>
+    </div>
+    <h1 data-i18n="auth.heroTitle"></h1>
+    <p data-i18n="auth.heroSub"></p>
+    <ul>
+      <li data-i18n-html="auth.f1"></li>
+      <li data-i18n-html="auth.f2"></li>
+      <li data-i18n-html="auth.f3"></li>
+      <li data-i18n-html="auth.f4"></li>
+      <li data-i18n-html="auth.f5"></li>
+    </ul>
+  </section>
+
+  <section class="auth-panel">
+    <div class="auth-box card">
+      <div class="seg" id="roleSeg">
+        <button data-role="citizen" class="active" data-i18n="auth.citizen"></button>
+        <button data-role="admin" data-i18n="auth.admin"></button>
+      </div>
+
+      <h2 id="formTitle"></h2>
+      <p class="muted small" id="formSub"></p>
+      <div id="msg"></div>
+
+      <!-- Citizen login -->
+      <form id="citizenLogin" class="auth-form">
+        <label data-i18n="auth.email"></label><input type="email" name="email" required autocomplete="email">
+        <label data-i18n="auth.password"></label><input type="password" name="password" required autocomplete="current-password">
+        <button class="btn btn-primary btn-block btn-lg" style="margin-top:1.1rem" data-i18n="auth.btnLogin"></button>
+      </form>
+
+      <!-- Citizen register -->
+      <form id="citizenRegister" class="auth-form hidden">
+        <label data-i18n="auth.fullName"></label><input name="name" required>
+        <label data-i18n="auth.email"></label><input type="email" name="email" required autocomplete="email">
+        <label data-i18n="auth.password"></label><input type="password" name="password" minlength="6" required autocomplete="new-password">
+        <button class="btn btn-primary btn-block btn-lg" style="margin-top:1.1rem" data-i18n="auth.btnCreate"></button>
+      </form>
+
+      <!-- Admin login: department + password -->
+      <form id="adminLogin" class="auth-form hidden">
+        <label data-i18n="auth.department"></label><select name="department" class="dept-select" required></select>
+        <label data-i18n="auth.password"></label><input type="password" name="password" required autocomplete="current-password">
+        <button class="btn btn-primary btn-block btn-lg" style="margin-top:1.1rem" data-i18n="auth.btnAdminLogin"></button>
+      </form>
+
+      <!-- Admin register -->
+      <form id="adminRegister" class="auth-form hidden">
+        <label data-i18n="auth.adminName"></label><input name="name" required>
+        <label data-i18n="auth.department"></label><select name="department" class="dept-select" required></select>
+        <label data-i18n="auth.deptEmail"></label><input type="email" name="email" required placeholder="roads@municipality.gov.in">
+        <label data-i18n="auth.createPassword"></label><input type="password" name="password" minlength="6" required autocomplete="new-password">
+        <button class="btn btn-primary btn-block btn-lg" style="margin-top:1.1rem" data-i18n="auth.btnAdminRegister"></button>
+      </form>
+
+      <div class="switch-link" id="switchLink"></div>
+    </div>
+  </section>
+</div>
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/common.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>

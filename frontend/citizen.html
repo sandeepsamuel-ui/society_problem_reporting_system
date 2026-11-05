@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CivicPulse – Citizen</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">🏙️</span> CivicPulse</div>
+  <div class="who">
+    <div class="lang-switch on-dark"></div>
+    <span class="name" id="userName"></span>
+    <button class="btn" onclick="logout()" data-i18n="common.logout"></button>
+  </div>
+</header>
+
+<main class="container">
+  <!-- Permissions -->
+  <div class="card" id="permCard" style="margin-bottom:1rem">
+    <div class="perm-row">
+      <div style="flex:1;min-width:220px">
+        <b data-i18n="cz.permTitle"></b>
+        <div class="muted small" data-i18n="cz.permSub"></div>
+      </div>
+      <span class="chip" id="gpsChip"></span>
+      <span class="chip" id="camChip"></span>
+      <button class="btn btn-primary" id="permBtn" data-i18n="cz.allow"></button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="report" data-i18n="cz.tabReport"></button>
+    <button class="tab" data-tab="history" data-i18n="cz.tabHistory"></button>
+  </div>
+
+  <!-- REPORT -->
+  <section id="tab-report">
+    <div class="report-grid">
+      <div class="card">
+        <h3 data-i18n="cz.step1"></h3>
+        <div class="camera-box" id="cameraBox">
+          <video id="video" autoplay playsinline muted class="hidden"></video>
+          <img id="preview" class="hidden" alt="">
+          <span id="camPlaceholder" data-i18n="cz.camPlaceholder"></span>
+        </div>
+        <canvas id="canvas" class="hidden"></canvas>
+        <div class="camera-actions">
+          <button class="btn btn-primary" id="captureBtn" disabled data-i18n="cz.capture"></button>
+          <button class="btn hidden" id="retakeBtn" data-i18n="cz.retake"></button>
+          <label class="btn" style="margin:0;font-weight:600"><span data-i18n="cz.upload"></span>
+            <input type="file" id="fileInput" accept="image/*" capture="environment" class="hidden">
+          </label>
+        </div>
+        <div class="loc" id="locText"></div>
+      </div>
+
+      <div class="card">
+        <h3><span data-i18n="cz.step2"></span> <span class="ai-badge">✨ AI</span></h3>
+        <div id="aiEmpty" class="empty" data-i18n="cz.aiEmpty"></div>
+        <div id="aiError" class="hidden"></div>
+        <div id="aiLoading" class="empty hidden"><span class="spinner"></span> <span data-i18n="cz.aiLoading"></span></div>
+
+        <form id="reportForm" class="hidden">
+          <div id="aiWarn"></div>
+          <div class="analysis">
+            <div class="box"><b data-i18n="cz.category"></b><span id="aCategory"></span></div>
+            <div class="box"><b data-i18n="cz.assignedDept"></b><span id="aDept"></span></div>
+            <div class="box"><b data-i18n="cz.visualSeverity"></b><span id="aSeverity"></span></div>
+            <div class="box"><b data-i18n="cz.confidence"></b><span id="aConf"></span></div>
+          </div>
+          <label data-i18n="cz.title"></label>
+          <input id="title" required maxlength="120">
+          <label data-i18n="cz.description"></label>
+          <textarea id="description" required></textarea>
+
+          <div class="voice">
+            <b data-i18n="cz.voiceTitle"></b>
+            <div class="muted small" style="margin:.2rem 0 .6rem" data-i18n="cz.voiceSub"></div>
+            <div class="voice-row">
+              <select id="voiceLang">
+                <option value="te-IN">తెలుగు (Telugu)</option>
+                <option value="en-IN">English (India)</option>
+              </select>
+              <button type="button" class="mic" id="micBtn">🎤</button>
+            </div>
+            <textarea id="voiceText" data-i18n-ph="cz.voicePh" style="margin-top:.6rem;min-height:70px"></textarea>
+            <button type="button" class="btn btn-accent" id="reanalyzeBtn" style="margin-top:.5rem" data-i18n="cz.voiceUpdate"></button>
+            <div class="muted small hidden" id="noSpeech" data-i18n="cz.noSpeech"></div>
+          </div>
+
+          <button class="btn btn-primary btn-block btn-lg" id="submitBtn" style="margin-top:1rem" data-i18n="cz.submit"></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section id="tab-history" class="hidden">
+    <div class="filters">
+      <h3 style="margin:0;flex:1" data-i18n="cz.historyTitle"></h3>
+      <button class="btn" id="refreshBtn">↻ <span data-i18n="common.refresh"></span></button>
+    </div>
+    <div id="history" class="history"></div>
+  </section>
+</main>
+
+<!-- Success modal -->
+<div class="modal hidden" id="successModal">
+  <div class="modal-box sm">
+    <div class="success-icon">✓</div>
+    <h2 data-i18n="cz.successTitle"></h2>
+    <p id="successText" class="muted"></p>
+    <div id="successDetails"></div>
+    <div style="display:flex;gap:.6rem;margin-top:1rem">
+      <button class="btn btn-block" id="newReportBtn" data-i18n="cz.reportAnother"></button>
+      <button class="btn btn-primary btn-block" id="viewHistoryBtn" data-i18n="cz.viewReports"></button>
+    </div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/common.js"></script>
+<script src="js/citizen.js"></script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>

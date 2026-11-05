@@ -1,0 +1,10 @@
+{
+  "name": "civicpulse",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CivicPulse: AI-powered civic issue reporting. Run `npm install` then `npm start` from this folder.",
+  "scripts": {
+    "postinstall": "npm --prefix backend install --no-audit --no-fund",
+    "start": "npm --prefix backend start"
+  }
+}

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CivicPulse – Department Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">🏛️</span> <span>CivicPulse · <span id="deptName"></span></span></div>
+  <div class="who">
+    <div class="lang-switch on-dark"></div>
+    <span class="name" id="userName"></span>
+    <button class="btn" onclick="logout()" data-i18n="common.logout"></button>
+  </div>
+</header>
+
+<main class="container">
+  <div class="stats" id="stats"></div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="issues" data-i18n="ad.tabIssues"></button>
+    <button class="tab" data-tab="heatmap" data-i18n="ad.tabHeatmap"></button>
+    <button class="tab" data-tab="ailog" data-i18n="ad.tabAiLog"></button>
+  </div>
+
+  <section id="tab-issues" class="card">
+    <div class="filters">
+      <h3 style="margin:0;flex:1"><span data-i18n="ad.issuesTitle"></span> <span class="muted small" data-i18n="ad.sortedNote"></span></h3>
+      <select id="fStatus">
+        <option value="" data-i18n="ad.allStatuses"></option>
+        <option value="Submitted" data-i18n="status.Submitted"></option>
+        <option value="In Progress" data-i18n="status.In Progress"></option>
+        <option value="Resolved" data-i18n="status.Resolved"></option>
+      </select>
+      <select id="fPriority">
+        <option value="" data-i18n="ad.allPriorities"></option>
+        <option value="Critical" data-i18n="prio.Critical"></option>
+        <option value="High" data-i18n="prio.High"></option>
+        <option value="Medium" data-i18n="prio.Medium"></option>
+        <option value="Low" data-i18n="prio.Low"></option>
+      </select>
+      <select id="fArea">
+        <option value="" data-i18n="ad.allAreas"></option>
+        <option value="red" data-i18n="area.red"></option>
+        <option value="orange" data-i18n="area.orange"></option>
+        <option value="yellow" data-i18n="area.yellow"></option>
+      </select>
+      <button class="btn" id="refreshBtn" data-i18n-title="common.refresh">↻</button>
+    </div>
+    <div class="area-legend" data-i18n="area.legend"></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th data-i18n="ad.thPhoto"></th><th>#</th><th data-i18n="ad.thArea"></th><th data-i18n="ad.thIssue"></th><th data-i18n="ad.thReportedBy"></th>
+          <th data-i18n="ad.thSeverity"></th><th data-i18n="ad.thReports"></th><th data-i18n="ad.thStatus"></th><th data-i18n="ad.thDate"></th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="tab-heatmap" class="card hidden">
+    <h3 data-i18n="ad.heatTitle"></h3>
+    <p class="muted small" data-i18n="ad.heatSub"></p>
+    <div id="map"></div>
+    <div class="legend">
+      <span><i style="background:var(--area-red)"></i><span data-i18n="area.red"></span></span>
+      <span><i style="background:var(--area-orange)"></i><span data-i18n="area.orange"></span></span>
+      <span><i style="background:var(--area-yellow)"></i><span data-i18n="area.yellow"></span></span>
+      <span><i style="background:#94a3b8"></i><span data-i18n="status.Resolved"></span></span>
+    </div>
+    <div class="area-legend" data-i18n="area.legend"></div>
+  </section>
+
+  <section id="tab-ailog" class="card hidden">
+    <h3 data-i18n="ad.aiTitle"></h3>
+    <p class="muted small" data-i18n="ad.aiSub"></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th data-i18n="ad.thPhoto"></th><th>#</th><th data-i18n="ad.thAiResult"></th><th data-i18n="ad.thAnalysedBy"></th>
+          <th data-i18n="ad.thSeverity"></th><th data-i18n="ad.thDupCheck"></th><th data-i18n="ad.thTicket"></th><th data-i18n="ad.thTime"></th>
+        </tr></thead>
+        <tbody id="aiRows"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<div class="modal hidden" id="detailModal">
+  <div class="modal-box">
+    <button class="modal-close" id="closeModal" data-i18n-title="bot.close">✕</button>
+    <div id="detail"></div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/common.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>
