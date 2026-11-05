@@ -5,12 +5,11 @@
   "main": "server.js",
   "private": true,
    "scripts": {
-    "start": "node backend/server.js",
-    "build": "npm install && npm install --prefix backend",
+    "start": "node --no-warnings=ExperimentalWarning server.js",
     "dev": "node --no-warnings=ExperimentalWarning --watch server.js"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.13"
   },
   "dependencies": {
     "@google/genai": "^2.32.0",
